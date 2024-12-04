@@ -1,0 +1,34 @@
+<header>
+  <div class="content">
+    <div class="logo" [routerLink]="['/feed']">
+      <img src="../../../assets/icons/logo.svg" alt="">
+      <h2>CIDADÃO CONECTADO</h2>
+    </div>
+
+    <nav>
+      <a
+        [routerLink]="['/feed']"
+        routerLinkActive="active"
+      >
+        <img src="../../../assets/icons/feed.svg" alt="">
+        Feed
+      </a>
+
+      <a
+        [routerLink]="['/novo-topico']"
+        routerLinkActive="active"
+      >
+        <img src="../../../assets/icons/new-topic.svg" alt="">
+        Novo tópico
+      </a>
+
+      <a
+        [routerLink]="['/consultar']"
+        routerLinkActive="active"
+      >
+        <img src="../../../assets/icons/consultar.svg" alt="">
+        Consultar
+      </a>
+    </nav>
+  </div>
+</header>
