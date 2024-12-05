@@ -13,10 +13,17 @@
   font-family: 'Inter', sans-serif;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+}
+
 body {
   font-family: 'Inter', sans-serif;
   max-width: 100vw;
-  min-height: 100vh;
+  /* height: 100vh; */
   padding: 1rem;
   overflow-x: hidden;
 }
@@ -25,3 +32,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+ */
