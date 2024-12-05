@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <div class="options">
+    <ng-content></ng-content>
+
+    <app-button
+      theme="primary"
+      (click)="login()"
+    >
+      <img src="../../../assets/icons/login.svg" alt="">
+      Fazer login
+    </app-button>
+  </div>
+</div>
