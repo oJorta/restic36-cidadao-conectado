@@ -1,7 +1,8 @@
 :root {
   --blue-primary: #4A46CC;
   --blue-secundary: #6D7FEB;
-  --secudary-text: #3F3E3E;
+  --secundary-text: #3F3E3E;
+  --bg-color: #F4F4F5;
   --box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 

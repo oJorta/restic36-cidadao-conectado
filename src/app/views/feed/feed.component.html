@@ -1,1 +1,77 @@
-<p>feed works!</p>
+<div class="container">
+  <div class="page-header">
+    <h1>Feed</h1>
+    <div class="options">
+      <app-button
+        theme="primary"
+      >
+        Criar novo tópico
+      </app-button>
+
+      <app-button
+        theme="primary"
+      >
+        <img src="../../../assets/icons/refresh.svg" alt="">
+      </app-button>
+
+      <app-button
+        theme="primary"
+      >
+        <img src="../../../assets/icons/login.svg" alt="">
+        Fazer login
+      </app-button>
+    </div>
+  </div>
+
+  <div class="filter-options-container">
+    <p>Filtrar:</p>
+
+    <app-button
+    (click)="toggleSort('likes')"
+    [theme]="sortBy === 'likes' ? 'active' : 'default'"
+    >
+      @if (sortBy === 'likes' && sortOrder === 'asc') {
+        <img src="../../../assets/icons/sort-asc.svg" alt="">
+      } @else if (sortBy === 'likes' && sortOrder === 'desc') {
+        <img src="../../../assets/icons/sort-desc.svg" alt="">
+      }
+      Curtidas
+    </app-button>
+
+    <app-button
+      (click)="toggleSort('comments')"
+      [theme]="sortBy === 'comments' ? 'active' : 'default'"
+    >
+      @if (sortBy === 'comments' && sortOrder === 'asc') {
+        <img src="../../../assets/icons/sort-asc.svg" alt="">
+      } @else if (sortBy === 'comments' && sortOrder === 'desc') {
+        <img src="../../../assets/icons/sort-desc.svg" alt="">
+      }
+      Comentários
+    </app-button>
+
+    <app-button
+      (click)="toggleSort('date')"
+      [theme]="sortBy === 'date' ? 'active' : 'default'"
+    >
+      @if (sortBy === 'date' && sortOrder === 'asc') {
+        <img src="../../../assets/icons/sort-asc.svg" alt="">
+      } @else if (sortBy === 'date' && sortOrder === 'desc') {
+        <img src="../../../assets/icons/sort-desc.svg" alt="">
+      }
+      Data de publicação
+    </app-button>
+  </div>
+
+  <div class="feed-container">
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+    <app-feed-post></app-feed-post>
+  </div>
+
+</div>
