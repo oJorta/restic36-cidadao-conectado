@@ -3,31 +3,40 @@
     <img src="../../../assets/images/feed-post-user-pic.png" alt="Foto de perfil do usuário">
   </div>
 
-  <div class="post-content">
-    <p class="title">&#64;usuário - Título da postagem</p>
-    <p>Postado 5 horas atrás</p>
-    <p>Descrição da postagem</p>
+  <div
+    class="post-content"
+    [ngClass]="{ 'expanded': isExpanded }"
+  >
+    <p class="title">&#64;{{ userName }} - {{ title }}</p>
+    <p>Postado {{ formatedDate }} horas atrás</p>
+    <p
+      class="description"
+      [ngClass]="{ 'expanded': isExpanded }"
+    >
+      {{ description }}
+    </p>
   </div>
 
   <div class="options">
     <app-button
       theme="default"
+      (click)="toggleExpand()"
     >
-      Expandir
+    {{ isExpanded ? 'Fechar' : 'Expandir' }}
     </app-button>
 
     <div class="interactions">
-    <app-button
-    >
-      <img src="../../../assets/icons/like.svg" alt="">
-      60
-    </app-button>
+      <app-button
+      >
+        <img src="../../../assets/icons/like.svg" alt="">
+        {{ likes }}
+      </app-button>
 
-    <app-button
-    >
-      <img src="../../../assets/icons/comment.svg" alt="">
-      10
-    </app-button>
+      <app-button
+      >
+        <img src="../../../assets/icons/comment.svg" alt="">
+        {{ comments }}
+      </app-button>
     </div>
   </div>
 </div>

@@ -2,11 +2,13 @@
   display: flex;
   padding: 1rem 2rem;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   align-self: stretch;
   background-color: #ffffff;
   border-radius: 5px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .user-picture {
@@ -23,6 +25,13 @@
 
 .post-content {
   width: 100%;
+  max-height: 100px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.post-content.expanded {
+  max-height: 500px;
 }
 
 .post-content .title {
@@ -34,8 +43,26 @@
   color: var(--secundary-text);
 }
 
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-word;
+}
+
+.description.expanded {
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+}
+
 .options {
   display: flex;
   flex-direction: column;
+  gap: .5rem;
+}
+
+.interactions {
+  display: flex;
   gap: .5rem;
 }
