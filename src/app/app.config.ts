@@ -11,10 +11,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAuth0({
       domain: 'dev-yp8wi18hj3yjl2vh.us.auth0.com',
-      clientId: '9MZ61PUb56i5zDvFOMgBPS8Nj0adKttL',
+      clientId: 'UaxuG0Rw12nwT188A6fFjk7fMMqSrPgf',
       authorizationParams: {
         redirect_uri: window.location.origin,
-      }
+        audience: 'https://dev-yp8wi18hj3yjl2vh.us.auth0.com/api/v2/',
+        scope: 'openid profile email offline_access'
+      },
+      useRefreshTokens: true,
+      cacheLocation: 'localstorage'
     }),
   ]
 };

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
 import { AuthService } from '../../services/auth/auth.service';
+import { User } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-page-header',
@@ -12,10 +13,23 @@ import { AuthService } from '../../services/auth/auth.service';
 export class PageHeaderComponent {
   @Input() title: string = 'Título da página';
 
+  profile!: User | null | undefined;
+  isAuthenticated!: boolean;
+
   constructor(private auth: AuthService) {}
 
-  login() {
+  ngOnInit() {
+    this.auth.getUser().subscribe(profile => this.profile = profile);
+
+    this.auth.isAuthenticated().subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
+  }
+
+  login () {
     this.auth.login();
+  }
+
+  logout () {
+    this.auth.logout();
   }
 
 }
