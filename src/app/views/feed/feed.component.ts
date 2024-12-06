@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 import { SortByField, SortOrder } from '../../types/models';
@@ -16,8 +16,13 @@ import { PageHeaderComponent } from "../../components/page-header/page-header.co
 export class FeedComponent {
   sortBy: SortByField = 'date';
   sortOrder: SortOrder = 'desc';
+  @Output() pageTitle = new EventEmitter<string>();
 
   constructor(private auth: AuthService) {}
+
+  ngOnInit() {
+    this.pageTitle.emit('Feed');
+  }
 
   login() {
     this.auth.loginWithRedirect();

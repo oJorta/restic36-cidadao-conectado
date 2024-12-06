@@ -10,5 +10,10 @@ import { HeaderComponent } from "./components/header/header.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'restic36-cidadao-conectado';
+  title: string = '';
+
+  handleTitleChange(title: string) {
+    console.log('Title changed to:', title);
+    this.title = title;
+  }
 }

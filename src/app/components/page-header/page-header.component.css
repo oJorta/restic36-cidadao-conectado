@@ -18,25 +18,26 @@
 .user-profile-container {
   display: flex;
   align-items: center;
+  max-width: 215px;
   gap: .5rem;
   padding: 8px 16px;
   border-radius: 5px;
   background-color: var(--blue-primary);
   box-shadow: var(--box-shadow);
+  overflow: hidden;
 }
 
-.user-profile-container p {
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-word;
   color: #ffffff;
 }
 
-.user-picture {
+.user-picture img {
   width: 32px;
   height: 32px;
   border-radius: 5px;
-}
-
-.user-picture img {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
+  object-fit: cover;
 }
