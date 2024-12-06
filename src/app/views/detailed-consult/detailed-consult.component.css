@@ -60,6 +60,17 @@
   margin: 0 .5rem;
 }
 
+.data-source-info {
+  text-align: center;
+  font-size: 14px;
+}
+
+.data-source-info a {
+  text-decoration: underline;
+  color: var(--blue-secundary);
+  font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
   .info-row {
     flex-direction: column;

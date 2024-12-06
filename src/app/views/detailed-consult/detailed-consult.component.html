@@ -2,54 +2,54 @@
   <app-page-header title="Informações detalhadas"></app-page-header>
 
   <div class="page-info">
-    <h2>Renúncia Fiscal - ID #00001</h2>
+    <h2>Renúncia Fiscal - ID #{{ resignId }}</h2>
     <p>Informações detalhadas sobre o objeto de sua escolha.</p>
   </div>
 
   <div class="content">
     <div class="detailed-info-container">
-      <h2>ID #00001</h2>
+      <h2>ID #{{ resignId }}</h2>
       <div class="detailed-info">
         <div class="info-row">
           <div class="info">
             <h3>Dados da Empresa</h3>
-            <p><span>CNPJ:</span> 12.345.678/0001-90</p>
-            <p><span>Razão Social:</span> Empresa X Ltda.</p>
-            <p><span>Nome Fantasia:</span> Empresa X</p>
-            <p><span>Município:</span> São Paulo</p>
-            <p><span>UF:</span> SP</p>
-            <p><span>Código IBGE:</span> 3550308</p>
+            <p><span>CNPJ:</span> {{resign.cnpj}}</p>
+            <p><span>Razão Social:</span> {{resign.razaoSocial}}.</p>
+            <p><span>Nome Fantasia:</span> {{resign.nomeFantasia}}</p>
+            <p><span>Município:</span> {{resign.municipio}}</p>
+            <p><span>UF:</span> {{resign.uf}}</p>
+            <p><span>Código IBGE:</span> {{resign.codigoIBGE}}</p>
           </div>
           <div class="separator"></div>
           <div class="info">
             <h3>Informações gerais</h3>
-            <p><span>Ano:</span>Ano: 2024</p>
-            <p><span>Valor Renunciado:</span> R$1.500.000</p>
-            <p><span>Tipo de Renúncia:</span> Fiscal</p>
-            <p><span>Tributo:</span> Income Tax</p>
-            <p><span>Forma de Tributação:</span> Progressive</p>
+            <p><span>Ano:</span> {{resign.ano}}</p>
+            <p><span>Valor Renunciado:</span> {{resign.valorRenunciado | currency: 'BRL'}}</p>
+            <p><span>Tipo de Renúncia:</span> {{resign.tipoRenuncia}}</p>
+            <p><span>Tributo:</span> {{resign.tributo}}</p>
+            <p><span>Forma de Tributação:</span> {{resign.formaTributacao}}</p>
           </div>
         </div>
         <hr>
         <div class="info-row">
           <div class="info">
             <h3>Descrições</h3>
-            <p><span>Benefício Fiscal:</span> Exemption on income tax</p>
-            <p><span>Fundamento Legal:</span> Article 5, Law 123/2017</p>
+            <p><span>Benefício Fiscal:</span> {{resign.descricaoBeneficioFiscal}}</p>
+            <p><span>Fundamento Legal:</span> {{resign.descricaoFundamentoLegal}}</p>
           </div>
           <div class="separator"></div>
           <div class="info">
             <h3>CNAE</h3>
-            <p><span>Código do Grupo:</span> 47</p>
-            <p><span>Código da Classe:</span> 4741</p>
-            <p><span>Código da Subclasse:</span> 4741200</p>
-            <p><span>Nome da Classe:</span> Retail trade</p>
-            <p><span>Divisão:</span> 47</p>
+            <p><span>Código do Grupo:</span> {{resign.cnaeCodigoGrupo}}</p>
+            <p><span>Código da Classe:</span> {{resign.cnaeCodigoClasse}}</p>
+            <p><span>Código da Subclasse:</span> {{resign.cnaeCodigoSubClasse}} </p>
+            <p><span>Nome da Classe:</span> {{resign.cnaeNomeClasse}}</p>
+            <p><span>Divisão:</span> {{resign.cnaeDivisao}}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <p>Dados retirados da API do <a href="https://portaldatransparencia.gov.br/" target="_blank">Portal da Transparência do Governo Federal</a>.</p>
+  <p class="data-source-info">Dados retirados da API do <a href="https://portaldatransparencia.gov.br/" target="_blank">Portal da Transparência do Governo Federal</a>.</p>
 </div>
