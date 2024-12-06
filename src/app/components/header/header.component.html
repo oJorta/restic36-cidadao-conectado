@@ -7,8 +7,9 @@
 
     <nav>
       <a
-        [routerLink]="['/feed']"
+        [routerLink]="['/']"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
         <img src="../../../assets/icons/feed.svg" alt="">
         Feed
