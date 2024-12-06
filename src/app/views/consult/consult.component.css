@@ -4,11 +4,11 @@
   margin-top: 20px;
 }
 
-.info h2 {
+.page-info h2 {
   color: var(--secundary-text);
 }
 
-.info ul {
+.page-info ul {
   padding: 0 1rem;
   margin: 1rem 0;
 }

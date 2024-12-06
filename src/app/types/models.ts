@@ -20,6 +20,27 @@ export interface PostInteraction {
   post?: Post;
 }
 
+export interface Resign {
+  ano: number;
+  valorRenunciado: number;
+  tipoRenuncia: string;
+  descricaoBeneficioFiscal: string;
+  descricaoFundamentoLegal: string;
+  tributo: string;
+  formaTributacao: string;
+  cnpj: string;
+  razaoSocial: string;
+  nomeFantasia: string;
+  cnaeCodigoGrupo: string;
+  cnaeCodigoClasse: string;
+  cnaeCodigoSubClasse: string;
+  cnaeNomeClasse: string;
+  cnaeDivisao: string;
+  uf: string;
+  municipio: string;
+  codigoIBGE: string;
+}
+
 export type SortByField = 'likes' | 'comments' | 'date';
 
 export type SortOrder = 'asc' | 'desc';
