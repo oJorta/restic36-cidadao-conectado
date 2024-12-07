@@ -41,6 +41,49 @@ export interface Resign {
   codigoIBGE: string;
 }
 
+export interface FamilyScholarship {
+  id: number;
+  dataReferencia: string;
+  municipio: {
+    codigoIBGE: string;
+    nomeIBGE: string;
+    codigoRegiao: string;
+    nomeRegiao: string;
+    pais: string;
+    uf: {
+      sigla: string;
+      nome: string;
+    };
+  };
+  tipo: {
+    id: number;
+    descricao: string;
+    descricaoDetalhada: string;
+  };
+  valor: number;
+  quantidadeBeneficiados: number;
+}
+
+export interface Adment {
+  codigoEmenda: string;
+  ano: number;
+  tipoEmenda: string;
+  autor: string;
+  nomeAutor: string;
+  numeroEmenda: string;
+  localidadeDoGasto: string;
+  funcao: string;
+  subfuncao: string;
+  valorEmpenhado: string;
+  valorLiquidado: string;
+  valorPago: string;
+  valorRestoInscrito: string;
+  valorRestoCancelado: string;
+  valorRestoPago: string;
+}
+
 export type SortByField = 'likes' | 'comments' | 'date';
 
 export type SortOrder = 'asc' | 'desc';
+
+export type DataType = 'resigns' | 'adments' | 'family-scholarships';

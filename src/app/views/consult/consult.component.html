@@ -17,22 +17,22 @@
     <div class="category-selector-container">
       <a
         class="category-option"
-        [class.selected]="selectedCategory === 'renuncias'"
-        (click)="selectCategory('renuncias')"
+        [class.selected]="selectedCategory === 'resigns'"
+        (click)="selectCategory('resigns')"
       >
         Renúncias Fiscais
       </a>
       <a
         class="category-option"
-        [class.selected]="selectedCategory === 'bolsa-familia'"
-        (click)="selectCategory('bolsa-familia')"
+        [class.selected]="selectedCategory === 'family-scholarships'"
+        (click)="selectCategory('family-scholarships')"
       >
         Bolsa Família
       </a>
       <a
         class="category-option"
-        [class.selected]="selectedCategory === 'despesas'"
-        (click)="selectCategory('despesas')"
+        [class.selected]="selectedCategory === 'adments'"
+        (click)="selectCategory('adments')"
       >
         Despesas Públicas
       </a>
@@ -42,28 +42,20 @@
       <table>
         <thead>
           <tr>
-            <th>Ano</th>
-            <th>Tipo de renúncia</th>
-            <th>Valor renunciado</th>
-            <th>Tributo</th>
-            <th>Razão Social</th>
-            <th>Município</th>
-            <th>UF</th>
+            @for (header of categories[selectedCategory].headers; track $index) {
+              <th>{{ header }}</th>
+            }
           </tr>
         </thead>
 
         <tbody>
-          @for (row of data; track $index) {
+          @for (row of categories[selectedCategory].data; track $index) {
             <tr
               (click)="navigateToDetailedConsult($index)"
             >
-              <td>{{ row.ano }}</td>
-              <td>{{ row.tipoRenuncia }}</td>
-              <td>{{ row.valorRenunciado | currency: 'BRL' }}</td>
-              <td>{{ row.tributo }}</td>
-              <td>{{ row.razaoSocial }}</td>
-              <td>{{ row.municipio }}</td>
-              <td>{{ row.uf }}</td>
+              @for (header of categories[selectedCategory].headers; track $index) {
+                {{ getColumnValue(row, header) | currency: 'BRL' }}
+              }
             </tr>
           }
         </tbody>
