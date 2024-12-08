@@ -6,14 +6,18 @@ import { PostInteraction, User } from '../../types/models';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:5131/api/v1';
 
   constructor(
     private http: HttpClient,
   ) { }
 
+  getUsers() {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  }
+
   getUserById(id: string) {
-    return this.http.get<User[]>(`${this.apiUrl}/users?id=${id}`);
+    return this.http.get<User[]>(`${this.apiUrl}/users/${id}`);
   }
 
   getUserByEmail(email: string) {

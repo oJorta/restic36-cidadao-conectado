@@ -1,4 +1,5 @@
 <div class="container">
+  <app-toast></app-toast>
   <app-page-header
     title="Feed"
   >
@@ -60,6 +61,7 @@
   <div class="feed-container">
     @for (post of posts; track post.id) {
       <app-feed-post
+        [userId]="post.userId"
         [title]="post.title || 'Sem título'"
         [description]="post.desc || 'Sem descrição'"
         [date]="post.pubDate"
@@ -67,9 +69,6 @@
         [tags]="post.tags"
       ></app-feed-post>
     }
-    <app-feed-post
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies. NLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies."
-    ></app-feed-post>
   </div>
 
   @if (isCreatePostModalOpen) {

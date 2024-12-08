@@ -31,14 +31,16 @@ export class AuthService {
     this.auth0.user$.subscribe(user => {
       if (user) {
         const userData = {
-          id: user.sub || '',
+          id: user.sub?.split('|')[1] || '',
           name: user.name || 'Usuário',
           email: user.email || '',
-          socialLoginProvider: user.sub?.split('|')[0] || 'auth0',
         }
 
-        this.userService.getUserById(userData.id).subscribe(userExists => {
-          if (userExists.length === 0) {
+        this.userService.getUserById(userData.id).subscribe({
+          next: ()  => {
+            console.log('Usuário já existe');
+          },
+          error: () => {
             this.userService.createUser(userData).subscribe(() => {
               console.log('Usuário criado');
             });

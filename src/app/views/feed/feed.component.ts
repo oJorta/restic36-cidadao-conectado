@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { Component, ViewChild } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 import { Post, SortByField, SortOrder } from '../../types/models';
 import { FeedPostComponent } from "../../components/feed-post/feed-post.component";
@@ -7,19 +7,22 @@ import { ButtonComponent } from "../../components/button/button.component";
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
 import { PostService } from '../../services/post/post.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NotificationService } from '../../services/notification/notification.service';
+import { ToastComponent } from '../../components/toast/toast.component';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [ButtonComponent, FeedPostComponent, PageHeaderComponent, ReactiveFormsModule],
+  imports: [ButtonComponent, FeedPostComponent, PageHeaderComponent, ReactiveFormsModule, ToastComponent],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
 export class FeedComponent {
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   posts: Post[] = [];
   sortBy: SortByField = 'date';
   sortOrder: SortOrder = 'desc';
-  isCreatePostModalOpen: boolean = true;
+  isCreatePostModalOpen: boolean = false;
 
   postForm = new FormGroup({
     title: new FormControl(''),
@@ -29,23 +32,19 @@ export class FeedComponent {
 
   constructor(
     private auth: AuthService,
-    private postService: PostService
+    private postService: PostService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
+      this.sortPosts(this.sortBy, this.sortOrder);
     });
   }
 
-  login() {
-    this.auth.loginWithRedirect();
-  }
-
-  logout() {
-    this.auth.logout({
-      logoutParams: {returnTo: window.location.origin},
-    });
+  ngAfterViewInit() {
+    this.notificationService.registerToastComponent(this.toast);
   }
 
   sortPosts(sortBy: SortByField, sortOrder: SortOrder) {
@@ -75,22 +74,29 @@ export class FeedComponent {
   }
 
   toggleCreatePostModal() {
-    this.isCreatePostModalOpen = !this.isCreatePostModalOpen;
-
-  }
-
-  createPost() {
-    const newPost: Partial<Post> = {
-      userId: '1',
-      title: this.postForm.value.title!,
-      desc: this.postForm.value.desc!,
-      tags: this.postForm.value.tags?.split(' ').join(',')!,
-    }
-    console.log(newPost);
-    this.postService.createPost(newPost).subscribe(() => {
-      this.postService.getPosts().subscribe(posts => this.posts = posts);
+    this.auth.isAuthenticated().subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+        this.notificationService.showMessage('Você precisa estar logado para criar uma postagem.');
+      } else {
+        this.isCreatePostModalOpen = !this.isCreatePostModalOpen;
+      }
     });
   }
 
-
+  createPost() {
+    this.auth.getUser().subscribe(user => {
+      const newPost: Partial<Post> = {
+        userId: user?.sub?.split('|')[1]!,
+        title: this.postForm.value.title!,
+        desc: this.postForm.value.desc!,
+        tags: this.postForm.value.tags?.split(' ').join(',')!,
+      }
+      this.postService.createPost(newPost).subscribe(() => {
+        this.postService.getPosts().subscribe(posts => {
+          this.posts = posts
+          this.sortPosts(this.sortBy, this.sortOrder);
+        });
+      });
+    });
+  }
 }
