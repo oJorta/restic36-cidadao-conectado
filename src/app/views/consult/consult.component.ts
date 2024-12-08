@@ -84,6 +84,16 @@ export class ConsultComponent {
   }
 
   navigateToDetailedConsult(resignId: number) {
-    this.router.navigate([`/consultar/${resignId}`]);
+    switch (this.selectedCategory) {
+      case 'resigns':
+        this.router.navigate([`/consultar/resigns/${resignId}`]);
+        break;
+      case 'family-scholarships':
+        this.router.navigate([`/consultar/family-scholarships/${resignId}`]);
+        break;
+      case 'adments':
+        this.router.navigate([`/consultar/adments/${resignId}`]);
+        break;
+    }
   }
 }

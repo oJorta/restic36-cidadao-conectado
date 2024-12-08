@@ -2,52 +2,40 @@
   <app-page-header title="Informações detalhadas"></app-page-header>
 
   <div class="page-info">
-    <h2>Renúncia Fiscal - ID #{{ resignId }}</h2>
+    <h2>{{ categoryName }} - ID #{{ resourceId }}</h2>
     <p>Informações detalhadas sobre o objeto de sua escolha.</p>
   </div>
 
   <div class="content">
     <div class="detailed-info-container">
-      <h2>ID #{{ resignId }}</h2>
-      <div class="detailed-info">
-        <div class="info-row">
-          <div class="info">
-            <h3>Dados da Empresa</h3>
-            <p><span>CNPJ:</span> {{resign.cnpj}}</p>
-            <p><span>Razão Social:</span> {{resign.razaoSocial}}.</p>
-            <p><span>Nome Fantasia:</span> {{resign.nomeFantasia}}</p>
-            <p><span>Município:</span> {{resign.municipio}}</p>
-            <p><span>UF:</span> {{resign.uf}}</p>
-            <p><span>Código IBGE:</span> {{resign.codigoIBGE}}</p>
-          </div>
-          <div class="separator"></div>
-          <div class="info">
-            <h3>Informações gerais</h3>
-            <p><span>Ano:</span> {{resign.ano}}</p>
-            <p><span>Valor Renunciado:</span> {{resign.valorRenunciado | currency: 'BRL'}}</p>
-            <p><span>Tipo de Renúncia:</span> {{resign.tipoRenuncia}}</p>
-            <p><span>Tributo:</span> {{resign.tributo}}</p>
-            <p><span>Forma de Tributação:</span> {{resign.formaTributacao}}</p>
-          </div>
+      <h2>ID #{{ resourceId }}</h2>
+        <div class="info">
+          @for (row of resource.data; track $index) {
+            @for (header of resource.headers; track $index) {
+              <p><span>{{ header.formatted }}:</span> {{ getColumnValue(row, header.formatted) }}</p>
+            }
+          }
         </div>
-        <hr>
-        <div class="info-row">
-          <div class="info">
-            <h3>Descrições</h3>
-            <p><span>Benefício Fiscal:</span> {{resign.descricaoBeneficioFiscal}}</p>
-            <p><span>Fundamento Legal:</span> {{resign.descricaoFundamentoLegal}}</p>
+        <!-- <div class="detailed-info">
+          <hr>
+          <div class="info-row">
+            <div class="info">
+              <h3>Descrições</h3>
+              <p><span>Benefício Fiscal:</span> {{resource.descricaoBeneficioFiscal}}</p>
+              <p><span>Fundamento Legal:</span> {{resource.descricaoFundamentoLegal}}</p>
+            </div>
+            <div class="separator"></div>
+            <div class="info">
+              <h3>CNAE</h3>
+              <p><span>Código do Grupo:</span> {{resource.cnaeCodigoGrupo}}</p>
+              <p><span>Código da Classe:</span> {{resource.cnaeCodigoClasse}}</p>
+              <p><span>Código da Subclasse:</span> {{resource.cnaeCodigoSubClasse}} </p>
+              <p><span>Nome da Classe:</span> {{resource.cnaeNomeClasse}}</p>
+              <p><span>Divisão:</span> {{resource.cnaeDivisao}}</p>
+            </div>
           </div>
-          <div class="separator"></div>
-          <div class="info">
-            <h3>CNAE</h3>
-            <p><span>Código do Grupo:</span> {{resign.cnaeCodigoGrupo}}</p>
-            <p><span>Código da Classe:</span> {{resign.cnaeCodigoClasse}}</p>
-            <p><span>Código da Subclasse:</span> {{resign.cnaeCodigoSubClasse}} </p>
-            <p><span>Nome da Classe:</span> {{resign.cnaeNomeClasse}}</p>
-            <p><span>Divisão:</span> {{resign.cnaeDivisao}}</p>
-          </div>
-        </div>
-      </div>
+        </div> -->
+
     </div>
   </div>
 

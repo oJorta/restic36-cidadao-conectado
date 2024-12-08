@@ -41,8 +41,8 @@ nav a {
   font-weight: 500;
   gap: .3rem;
   transition: .3s;
-  padding: 5px 15px;
-  border-radius: 99px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 nav a:hover {

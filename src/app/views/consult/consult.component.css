@@ -91,6 +91,7 @@ thead th {
   top: 0;
   left: 0;
   background-color: #ffffff;
+  font-size: 16px;
 }
 
 tbody tr:nth-child(even) {
@@ -99,6 +100,17 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
   background-color: #c8d0ff;
+}
+
+.data-source-info {
+  text-align: center;
+  font-size: 14px;
+  color: var(--secundary-text);
+}
+
+.data-source-info a {
+  color: var(--blue-secundary);
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 728px) {

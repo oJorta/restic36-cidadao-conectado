@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
-import { Resign } from '../../types/models';
-import { ResignService } from '../../services/resign/resign.service';
+import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models';
 import { ActivatedRoute } from '@angular/router';
+import { ConsultService } from '../../services/consult/consult.service';
 
 @Component({
   selector: 'app-detailed-consult',
@@ -13,21 +13,62 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './detailed-consult.component.css'
 })
 export class DetailedConsultComponent {
-  resign!: Resign;
-  resignId!: number;
+  category!: DataType;
+  categoryName!: string;
+  resourceId!: number;
+
+  resource: {
+    headers: { originalKey: string, formatted: string }[],
+    data: Resign[] | FamilyScholarship[] | Adment[];
+  } = {
+    headers: [],
+    data: []
+  };
+
   constructor(
-    private resignService: ResignService,
+    private consultService: ConsultService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.resignService.getResigns().subscribe(data => {
-      this.resignId = this.route.snapshot.params['id'];
-      this.resign = data[this.resignId];
-      console.log('Resign:', this.resign);
+    this.category = this.route.snapshot.params['category'];
+    this.resourceId = this.route.snapshot.params['id'];
+    this.categoryName = this.category === 'resigns' ? 'Renúncia Fiscal' : this.category === 'family-scholarships' ? 'Bolsa Família' : 'Emenda Parlamentar';
+
+    this.consultService.getData(this.category).subscribe(data => {
+      if (data.length === 0) {
+        console.warn(`Nenhum dado encontrado para a categoria ${this.category}`);
+        this.resource.data = [];
+        this.resource.headers = [];
+        return;
+      }
+
+      this.resource.data = data;
+
+      this.resource.headers = Object.keys(data[0]).map((key) => ({
+        originalKey: key,
+        formatted: this.formatHeader(key)
+      }));
+
+      console.log('Headers formatados:', this.resource.headers);
     });
   }
 
+  formatHeader(key: string): string {
+    return key
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 
+  getColumnValue(row: any, formattedHeader: string): any {
+    const mapping = this.resource.headers.find(header => header.formatted === formattedHeader);
 
+    if (!mapping) {
+      console.warn(`Chave correspondente ao header "${formattedHeader}" não encontrada.`);
+      return '—';
+    }
+
+    return row[mapping.originalKey] ?? '—';
+  }
 }

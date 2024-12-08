@@ -7,6 +7,6 @@ import { LandingPageComponent } from './views/landing-page/landing-page.componen
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'feed', component: FeedComponent},
-  { path: 'consultar/:id', component: DetailedConsultComponent },
+  { path: 'consultar/:category/:id', component: DetailedConsultComponent },
   { path: 'consultar', component: ConsultComponent },
 ];

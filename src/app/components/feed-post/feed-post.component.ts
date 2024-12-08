@@ -35,11 +35,11 @@ export class FeedPostComponent {
   ngOnInit() {
     this.userService.getUsers().subscribe(users => {
       const user = users.find(user => user.id === this.userId);
-      this.userName = user?.name || 'usuário';
+      console.log(users)
+      this.userName = user?.name.split(' ')[0] || 'usuário';
     });
 
     this.auth.getUser().subscribe(user => {
-      console.log(user);
       this.userLiked = this.likes.includes(user?.sub?.split('|')[1] || '');
     });
 

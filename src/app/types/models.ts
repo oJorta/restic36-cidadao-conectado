@@ -90,3 +90,60 @@ export type SortByField = 'likes' | 'comments' | 'date';
 export type SortOrder = 'asc' | 'desc';
 
 export type DataType = 'resigns' | 'adments' | 'family-scholarships';
+
+export const dataAttributes = {
+  resigns: {
+    "Ano": "ano",
+    "Valor Renunciado": "valorRenunciado",
+    "Tipo de Renúncia": "tipoRenuncia",
+    "Benefício Fiscal": "descricaoBeneficioFiscal",
+    "Fundamento Legal": "descricaoFundamentoLegal",
+    "Tributo": "tributo",
+    "Forma de Tributação": "formaTributacao",
+    "CNPJ": "cnpj",
+    "Razão Social": "razaoSocial",
+    "Nome Fantasia": "nomeFantasia",
+    "Código do Grupo": "cnaeCodigoGrupo",
+    "Código da Classe": "cnaeCodigoClasse",
+    "Código da Subclasse": "cnaeCodigoSubClasse",
+    "Nome da Classe": "cnaeNomeClasse",
+    "Divisão": "cnaeDivisao",
+    "UF": "uf",
+    "Município": "municipio",
+    "Código IBGE": "codigoIBGE",
+    "ID": "id"
+  },
+  familyScholarships: {
+    "ID": "id",
+    "Data de Referência": "dataReferencia",
+    "Município (Código IBGE)": "municipio.codigoIBGE",
+    "Município (Nome)": "municipio.nomeIBGE",
+    "Região (Código)": "municipio.codigoRegiao",
+    "Região (Nome)": "municipio.nomeRegiao",
+    "País": "municipio.pais",
+    "UF (Sigla)": "municipio.uf.sigla",
+    "UF (Nome)": "municipio.uf.nome",
+    "Tipo": "tipo.descricao",
+    "Descrição Detalhada": "tipo.descricaoDetalhada",
+    "Valor": "valor",
+    "Quantidade de Beneficiados": "quantidadeBeneficiados"
+  },
+  adments: {
+    "Código da Emenda": "codigoEmenda",
+    "Ano": "ano",
+    "Tipo de Emenda": "tipoEmenda",
+    "Autor": "autor",
+    "Nome do Autor": "nomeAutor",
+    "Número da Emenda": "numeroEmenda",
+    "Localidade do Gasto": "localidadeDoGasto",
+    "Função": "funcao",
+    "Subfunção": "subfuncao",
+    "Valor Empenhado": "valorEmpenhado",
+    "Valor Liquidado": "valorLiquidado",
+    "Valor Pago": "valorPago",
+    "Valor do Resto Inscrito": "valorRestoInscrito",
+    "Valor do Resto Cancelado": "valorRestoCancelado",
+    "Valor do Resto Pago": "valorRestoPago",
+    "ID": "id"
+  }
+};

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataType, Resign } from '../../types/models';
+import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,10 +11,10 @@ export class ConsultService {
   constructor(private http: HttpClient) { }
 
   getData(type: DataType) {
-    return this.http.get<Resign[]>(`${this.apiUrl}/${type}`);
+    return this.http.get<Resign[] | FamilyScholarship[] | Adment[]>(`${this.apiUrl}/${type}`);
   }
 
   getDataById(type: DataType, id: number) {
-    return this.http.get<Resign>(`${this.apiUrl}/${type}/${id}`);
+    return this.http.get<Resign[] | FamilyScholarship[] | Adment[]>(`${this.apiUrl}/${type}/${id}`);
   }
 }
