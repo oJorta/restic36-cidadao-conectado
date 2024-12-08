@@ -1,0 +1,29 @@
+.user-profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 215px;
+    gap: .5rem;
+    padding: 6px 14px;
+    background-color: var(--blue-secundary);
+    border-radius: 99px;
+}
+  
+.name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-word;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+  
+.user-picture img {
+    margin-top: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 99px;
+    object-fit: cover;
+}

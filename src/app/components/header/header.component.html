@@ -6,30 +6,42 @@
     </div>
 
     <nav>
-      <a
-        [routerLink]="['/']"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <img src="../../../assets/icons/feed.svg" alt="">
-        Feed
-      </a>
+      @if(!isAtHome) {
+        <a
+          [routerLink]="['/feed']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <img src="../../../assets/icons/feed.svg" alt="">
+          Feed
+        </a>
+  
+        <a
+          [routerLink]="['/novo-topico']"
+          routerLinkActive="active"
+        >
+          <img src="../../../assets/icons/new-topic.svg" alt="">
+          Novo tópico
+        </a>
+  
+        <a
+          [routerLink]="['/consultar']"
+          routerLinkActive="active"
+        >
+          <img src="../../../assets/icons/consultar.svg" alt="">
+          Consultar
+        </a>
+      }
 
-      <a
-        [routerLink]="['/novo-topico']"
-        routerLinkActive="active"
-      >
-        <img src="../../../assets/icons/new-topic.svg" alt="">
-        Novo tópico
-      </a>
-
-      <a
-        [routerLink]="['/consultar']"
-        routerLinkActive="active"
-      >
-        <img src="../../../assets/icons/consultar.svg" alt="">
-        Consultar
-      </a>
+      
+      @if (isAuthenticated) {
+        <app-user-profile></app-user-profile>
+      } @else {
+        <a (click)="login()">
+          <img src="../../../assets/icons/login.svg" alt="Icon for Login">
+          Fazer login
+        </a>
+      }
     </nav>
   </div>
 </header>

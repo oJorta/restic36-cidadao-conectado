@@ -1,0 +1,13 @@
+<div class="user-profile-container">
+    <div class="user-picture">
+      <img [src]="profile?.picture || '../../../assets/images/feed-post-user-pic.png'" alt="">
+    </div>
+
+    <p class="name">{{ profile?.name }}</p>
+
+    <app-button
+      (click)="logout()"
+    >
+      <img src="../../../assets/icons/logout.svg" alt="">
+    </app-button>
+  </div>
