@@ -8,7 +8,7 @@
     [ngClass]="{ 'expanded': isExpanded }"
   >
     <p class="title">&#64;{{ userName }} - {{ title }}</p>
-    <p>Postado {{ formatedDate }} horas atrás</p>
+    <p>Postado em {{ date | date: 'dd MMM yyyy' }} -  {{ date | date: 'hh:mm'}}</p>
     <p
       class="description"
       [ngClass]="{ 'expanded': isExpanded }"
@@ -27,15 +27,16 @@
 
     <div class="interactions">
       <app-button
+        (click)="toggleLike()"
       >
         <img src="../../../assets/icons/like.svg" alt="">
-        {{ likes }}
+        {{ likes.length }}
       </app-button>
 
       <app-button
       >
         <img src="../../../assets/icons/comment.svg" alt="">
-        {{ comments }}
+        {{ comments.length }}
       </app-button>
     </div>
   </div>

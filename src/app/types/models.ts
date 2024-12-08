@@ -5,14 +5,6 @@ export interface User {
   socialLinkProvider: string;
 }
 
-export interface Post {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  postedAt: string;
-}
-
 export interface PostInteraction {
   id: string;
   userId: string;
@@ -80,6 +72,17 @@ export interface Adment {
   valorRestoInscrito: string;
   valorRestoCancelado: string;
   valorRestoPago: string;
+}
+
+export interface Post {
+  userId: string;
+  id?: number;
+  title?: string;
+  desc?: string;
+  tags?: string;
+  pubDate: string;
+  likes: string[];
+  comments: string[];
 }
 
 export type SortByField = 'likes' | 'comments' | 'date';

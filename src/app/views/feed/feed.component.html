@@ -4,6 +4,7 @@
   >
     <app-button
       theme="primary"
+      (click)="toggleCreatePostModal()"
     >
       Criar novo tópico
     </app-button>
@@ -57,22 +58,90 @@
   </div>
 
   <div class="feed-container">
+    @for (post of posts; track post.id) {
+      <app-feed-post
+        [title]="post.title || 'Sem título'"
+        [description]="post.desc || 'Sem descrição'"
+        [date]="post.pubDate"
+        [likes]="post.likes"
+        [tags]="post.tags"
+      ></app-feed-post>
+    }
     <app-feed-post
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies. NLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nisl nec nisl ultricies ultricies."
     ></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
-    <app-feed-post></app-feed-post>
   </div>
+
+  @if (isCreatePostModalOpen) {
+    <div
+      class="modal-overlay"
+      (click)="toggleCreatePostModal()"
+      [className]="isCreatePostModalOpen && 'modal-overlay open'"
+    >
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2>Criar Novo Tópico</h2>
+
+        <form
+          [formGroup]="postForm"
+          (ngSubmit)="createPost()"
+        >
+          <div class="form-group">
+            <label for="title">Título*</label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              name="title"
+              placeholder="Título do tópico"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="desc">Descrição*</label>
+            <textarea
+              id="desc"
+              formControlName="desc"
+              name="desc"
+              placeholder="Descrição do tópico"
+              autocomplete="off"
+              required
+            >
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input
+              id="tags"
+              type="text"
+              formControlName="tags"
+              name="tags"
+              placeholder="Tags do tópico"
+              autocomplete="off"
+            />
+            <small>* Insira as tags separadas por espaço.</small>
+          </div>
+
+          <div class="modal-options">
+            <app-button
+              theme="primary"
+              type="submit"
+            >
+              Criar
+            </app-button>
+            <app-button
+              theme="default"
+              type="button"
+              (click)="toggleCreatePostModal()"
+            >
+              Cancelar
+            </app-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
 
 </div>
