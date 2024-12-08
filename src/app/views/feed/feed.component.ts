@@ -84,6 +84,7 @@ export class FeedComponent {
   }
 
   createPost() {
+    this.isCreatePostModalOpen = false;
     this.auth.getUser().subscribe(user => {
       const newPost: Partial<Post> = {
         userId: user?.sub?.split('|')[1]!,
