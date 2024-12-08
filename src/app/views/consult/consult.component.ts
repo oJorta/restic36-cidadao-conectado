@@ -41,27 +41,49 @@ export class ConsultComponent {
   ) {}
 
   ngOnInit() {
-    this.consultService.getData('resigns').subscribe(data => {
-      this.categories['resigns'].data = data;
-    });
+    this.fetchCategoryData(this.selectedCategory);
   }
 
   selectCategory(category: DataType) {
     this.selectedCategory = category;
+    this.fetchCategoryData(category);
+  }
 
-    /* this.consultService.getData(this.selectedCategory as DataType).subscribe(data => {
-      this.data = data;
-    }); */
+  fetchCategoryData(category: DataType) {
+    this.consultService.getData(category).subscribe((data: any[]) => {
+      if (data.length === 0) {
+        console.warn(`Nenhum dado encontrado para a categoria ${category}`);
+        this.categories[category].data = [];
+        this.categories[category].headers = [];
+        return;
+      }
+
+      this.categories[category].data = data;
+      this.categories[category].headers = Object.keys(data[0]).map(this.formatHeader);
+
+      console.log('Headers formatados:', this.categories[category].headers);
+      console.log('Chaves dos dados:', Object.keys(data[0]));
+    });
+  }
+
+  formatHeader(key: string): string {
+    return key
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   }
 
   getColumnValue(row: any, header: string): any {
-    const key = header.toLowerCase().replace(/\s+/g, '');
-    console.log(this.categories['resigns'].data)
-    return row[key];
+    const originalKey = Object.keys(row).find((key) => this.formatHeader(key) === header);
+
+    if (!originalKey) {
+      console.warn(`Chave correspondente ao header "${header}" não encontrada no objeto:`, row);
+    }
+
+    return originalKey ? row[originalKey] : '—';
   }
 
   navigateToDetailedConsult(resignId: number) {
-    console.log('Navigating to detailed consult for resignId:', resignId);
     this.router.navigate([`/consultar/${resignId}`]);
   }
 }

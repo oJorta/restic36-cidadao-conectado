@@ -54,7 +54,9 @@
               (click)="navigateToDetailedConsult($index)"
             >
               @for (header of categories[selectedCategory].headers; track $index) {
-                {{ getColumnValue(row, header) | currency: 'BRL' }}
+                <td>
+                  {{ getColumnValue(row, header) }}
+                </td>
               }
             </tr>
           }

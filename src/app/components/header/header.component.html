@@ -15,15 +15,7 @@
           <img src="../../../assets/icons/feed.svg" alt="">
           Feed
         </a>
-  
-        <a
-          [routerLink]="['/novo-topico']"
-          routerLinkActive="active"
-        >
-          <img src="../../../assets/icons/new-topic.svg" alt="">
-          Novo tópico
-        </a>
-  
+
         <a
           [routerLink]="['/consultar']"
           routerLinkActive="active"
@@ -33,7 +25,7 @@
         </a>
       }
 
-      
+
       @if (isAuthenticated) {
         <app-user-profile></app-user-profile>
       } @else {
