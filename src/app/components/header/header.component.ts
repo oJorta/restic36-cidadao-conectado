@@ -14,12 +14,13 @@ import { UserProfileComponent } from "../user-profile/user-profile.component";
 export class HeaderComponent implements OnInit{
   isAuthenticated!: boolean;
   isAtHome!: boolean;
+  isMenuOpen: boolean = false;
 
   constructor(
     private router: Router,
     private auth: AuthService
   ){ }
-  
+
   ngOnInit(): void {
     this.setIsAtHome();
     this.auth.isAuthenticated().subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
@@ -38,5 +39,9 @@ export class HeaderComponent implements OnInit{
 
   onRouterLinkActive(routerLink: any) {
     console.log('routerLink', routerLink);
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

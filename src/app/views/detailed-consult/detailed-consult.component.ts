@@ -35,7 +35,8 @@ export class DetailedConsultComponent {
     this.resourceId = this.route.snapshot.params['id'];
     this.categoryName = this.category === 'resigns' ? 'Renúncia Fiscal' : this.category === 'family-scholarships' ? 'Bolsa Família' : 'Emenda Parlamentar';
 
-    this.consultService.getData(this.category).subscribe(data => {
+    this.consultService.getDataById(this.category, this.resourceId).subscribe(data => {
+      console.log(data)
       if (data.length === 0) {
         console.warn(`Nenhum dado encontrado para a categoria ${this.category}`);
         this.resource.data = [];

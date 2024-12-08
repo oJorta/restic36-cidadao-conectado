@@ -74,7 +74,7 @@
   display: flex;
   gap: 1rem;
   width: 100%;
-  margin-top: .5rem;
+  margin-top: .5rem;flex-wrap: wrap;
 }
 
 .tags p {
@@ -84,4 +84,54 @@
   font-weight: 600;
   padding: .2rem .8rem;
   border-radius: 99px;
+}
+
+@media (max-width: 768px) {
+  .user-picture {
+    width: 50px;
+    height: 50px;
+  }
+
+  .post-content {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .tags p {
+    font-size: 10px;
+    padding: .2rem .5rem;
+  }
+
+  .post-content .title {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .user-picture {
+    width: 40px;
+    height: 40px;
+  }
+
+  .options {
+    gap: 1rem;
+  }
+
+  .options {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .tags {
+    justify-content: flex-start;
+  }
 }

@@ -9,6 +9,7 @@ header {
 .content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -33,6 +34,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 1rem;
+  transition: all 0.3s ease;
 }
 
 nav a {
@@ -54,6 +56,23 @@ nav a.active {
   background-color: var(--blue-secundary);
 }
 
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-toggle img {
+  width: 30px;
+  height: 30px;
+}
+
+nav {
+  display: flex;
+}
+
 @media screen and (min-width: 1200px) {
   .content {
     max-width: 1200px;
@@ -64,8 +83,46 @@ nav a.active {
   }
 }
 
-@media screen and (min-width: 785px){
+@media screen and (max-width: 785px){
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: var(--blue-primary);
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 10;
+  }
+
+  nav.active {
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 10px;
+    transform: translateY(150px);
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+    padding: 10px 1rem;
+  }
+}
+
+@media screen and (min-width: 786px){
   .logo h2 {
     display: block;
+  }
+
+  nav {
+    display: flex;
+    position: initial;
   }
 }

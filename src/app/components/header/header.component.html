@@ -5,7 +5,13 @@
       <h2>CIDADÃO CONECTADO</h2>
     </div>
 
-    <nav>
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle Menu">
+      <img src="../../../assets/icons/menu.svg" alt="Menu Icon">
+    </button>
+
+    <nav
+      [class.active]="isMenuOpen"
+    >
       @if(!isAtHome) {
         <a
           [routerLink]="['/feed']"

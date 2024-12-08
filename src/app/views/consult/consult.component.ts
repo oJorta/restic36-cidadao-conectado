@@ -4,11 +4,13 @@ import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models'
 import { CurrencyPipe } from '@angular/common';
 import { Data, Router } from '@angular/router';
 import { ConsultService } from '../../services/consult/consult.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ButtonComponent } from "../../components/button/button.component";
 
 @Component({
   selector: 'app-consult',
   standalone: true,
-  imports: [PageHeaderComponent, CurrencyPipe],
+  imports: [PageHeaderComponent, CurrencyPipe, ReactiveFormsModule, ButtonComponent],
   templateUrl: './consult.component.html',
   styleUrl: './consult.component.css'
 })
@@ -34,6 +36,12 @@ export class ConsultComponent {
   };
 
   data: Resign[] = [];
+
+  searchForm = new FormGroup({
+    city: new FormControl('2913606'),
+    month: new FormControl('10'),
+    year: new FormControl('2020'),
+  });
 
   constructor(
     private consultService: ConsultService,
@@ -75,7 +83,7 @@ export class ConsultComponent {
 
   getColumnValue(row: any, header: string): any {
     const originalKey = Object.keys(row).find((key) => this.formatHeader(key) === header);
-
+    console.log('Chave original:', originalKey);
     if (!originalKey) {
       console.warn(`Chave correspondente ao header "${header}" não encontrada no objeto:`, row);
     }
@@ -95,5 +103,17 @@ export class ConsultComponent {
         this.router.navigate([`/consultar/adments/${resignId}`]);
         break;
     }
+  }
+
+  searchFamilyScholarships(event: Event) {
+    event.preventDefault();
+    const city = this.searchForm.value.city ?? '';
+    const date = (this.searchForm.value.year ?? '') + (this.searchForm.value.month ?? '');
+
+    this.consultService.getData(this.selectedCategory, city, date).subscribe((data: Resign[] | FamilyScholarship[] | Adment[]) => {
+      if (this.selectedCategory === 'family-scholarships') {
+        this.categories['family-scholarships'].data = data as FamilyScholarship[];
+      }
+    });
   }
 }
