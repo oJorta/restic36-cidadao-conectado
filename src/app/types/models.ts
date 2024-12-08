@@ -13,6 +13,7 @@ export interface PostInteraction {
 }
 
 export interface Resign {
+  id: number;
   ano: number;
   valorRenunciado: number;
   tipoRenuncia: string;
@@ -57,6 +58,7 @@ export interface FamilyScholarship {
 }
 
 export interface Adment {
+  id: number;
   codigoEmenda: string;
   ano: number;
   tipoEmenda: string;

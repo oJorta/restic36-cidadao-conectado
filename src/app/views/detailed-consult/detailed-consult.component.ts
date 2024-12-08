@@ -36,7 +36,7 @@ export class DetailedConsultComponent {
     this.categoryName = this.category === 'resigns' ? 'Renúncia Fiscal' : this.category === 'family-scholarships' ? 'Bolsa Família' : 'Emenda Parlamentar';
 
     this.consultService.getDataById(this.category, this.resourceId).subscribe(data => {
-      console.log(data)
+      console.log(data);
       if (data.length === 0) {
         console.warn(`Nenhum dado encontrado para a categoria ${this.category}`);
         this.resource.data = [];
@@ -46,7 +46,7 @@ export class DetailedConsultComponent {
 
       this.resource.data = data;
 
-      this.resource.headers = Object.keys(data[0]).map((key) => ({
+      this.resource.headers = Object.keys(data).map((key) => ({
         originalKey: key,
         formatted: this.formatHeader(key)
       }));

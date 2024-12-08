@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
 import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models';
 import { CurrencyPipe } from '@angular/common';
-import { Data, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConsultService } from '../../services/consult/consult.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from "../../components/button/button.component";
+import { NotificationService } from '../../services/notification/notification.service';
+import { ToastComponent } from '../../components/toast/toast.component';
 
 @Component({
   selector: 'app-consult',
   standalone: true,
-  imports: [PageHeaderComponent, CurrencyPipe, ReactiveFormsModule, ButtonComponent],
+  imports: [PageHeaderComponent, CurrencyPipe, ReactiveFormsModule, ButtonComponent, ToastComponent],
   templateUrl: './consult.component.html',
   styleUrl: './consult.component.css'
 })
 export class ConsultComponent {
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   selectedCategory: DataType = 'resigns';
   categories: {
     resigns: { headers: string[]; data: Resign[] };
@@ -26,7 +29,7 @@ export class ConsultComponent {
       data: []
     },
     'family-scholarships': {
-      headers: ['Data de Referência', 'Município', 'Tipo', 'Valor', 'Quantidade de Beneficiados'],
+      headers: ['Data de Referência', 'Valor', 'Quantidade de Beneficiados'],
       data: []
     },
     'adments': {
@@ -45,11 +48,16 @@ export class ConsultComponent {
 
   constructor(
     private consultService: ConsultService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
     this.fetchCategoryData(this.selectedCategory);
+  }
+
+  ngAfterViewInit() {
+    this.notificationService.registerToastComponent(this.toast);
   }
 
   selectCategory(category: DataType) {
@@ -58,20 +66,22 @@ export class ConsultComponent {
   }
 
   fetchCategoryData(category: DataType) {
-    this.consultService.getData(category).subscribe((data: any[]) => {
-      if (data.length === 0) {
-        console.warn(`Nenhum dado encontrado para a categoria ${category}`);
-        this.categories[category].data = [];
-        this.categories[category].headers = [];
-        return;
-      }
+    if (category === 'family-scholarships') {
+      this.searchFamilyScholarships();
+    } else {
+      this.consultService.getData(category).subscribe((data: any[]) => {
+        if (data.length === 0) {
+          this.notificationService.showMessage('Nenhum dado encontrado para a categoria selecionada.');
+          this.categories[category].data = [];
+          this.categories[category].headers = [];
+          return;
+        }
 
-      this.categories[category].data = data;
-      this.categories[category].headers = Object.keys(data[0]).map(this.formatHeader);
-
-      console.log('Headers formatados:', this.categories[category].headers);
-      console.log('Chaves dos dados:', Object.keys(data[0]));
-    });
+        this.categories[category].data = data;
+        this.categories[category].headers = Object.keys(data[0]).map(this.formatHeader);
+        this.notificationService.showMessage('Dados carregados com sucesso.');
+      });
+    }
   }
 
   formatHeader(key: string): string {
@@ -81,14 +91,21 @@ export class ConsultComponent {
       .replace(/\b\w/g, (char) => char.toUpperCase());
   }
 
+  headerMapping: { [key: string]: string } = {
+    'Data de Referência': 'dataReferencia',
+    Valor: 'valor',
+    'Quantidade de Beneficiados': 'quantidadeBeneficiados'
+  };
+
   getColumnValue(row: any, header: string): any {
-    const originalKey = Object.keys(row).find((key) => this.formatHeader(key) === header);
-    console.log('Chave original:', originalKey);
+    const originalKey = this.headerMapping[header] || Object.keys(row).find((key) => this.formatHeader(key) === header);
+
     if (!originalKey) {
       console.warn(`Chave correspondente ao header "${header}" não encontrada no objeto:`, row);
+      return '—';
     }
 
-    return originalKey ? row[originalKey] : '—';
+    return row[originalKey];
   }
 
   navigateToDetailedConsult(resignId: number) {
@@ -105,14 +122,21 @@ export class ConsultComponent {
     }
   }
 
-  searchFamilyScholarships(event: Event) {
-    event.preventDefault();
+  searchFamilyScholarships(event?: Event) {
+    event?.preventDefault();
     const city = this.searchForm.value.city ?? '';
     const date = (this.searchForm.value.year ?? '') + (this.searchForm.value.month ?? '');
 
     this.consultService.getData(this.selectedCategory, city, date).subscribe((data: Resign[] | FamilyScholarship[] | Adment[]) => {
       if (this.selectedCategory === 'family-scholarships') {
-        this.categories['family-scholarships'].data = data as FamilyScholarship[];
+        if (data === null) {
+          this.notificationService.showMessage('Nenhum dado encontrado para a busca realizada.');
+          this.categories['family-scholarships'].data = [];
+        } else {
+          this.notificationService.showMessage('Busca realizada com sucesso.');
+          this.categories['family-scholarships'].data = [data] as any[];
+        }
+
       }
     });
   }

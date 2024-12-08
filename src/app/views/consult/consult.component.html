@@ -1,4 +1,5 @@
 <div class="container">
+  <app-toast></app-toast>
   <app-page-header
     title="Consultar"
   >
@@ -43,39 +44,41 @@
         [formGroup]="searchForm"
         (submit)="searchFamilyScholarships($event)"
       >
-        <select formControlName="city" name="" id="" required>
-          <option value="2914802">
-            Itabuna
-          </option>
-          <option value="2913606">
-            Ilhéus
-          </option>
-        </select>
+        <div>
+          <select formControlName="city" name="" id="" required>
+            <option value="2914802">
+              Itabuna
+            </option>
+            <option value="2913606">
+              Ilhéus
+            </option>
+          </select>
 
-        <select formControlName="month" name="" id="" required>
-          <option value="01">Janeiro</option>
-          <option value="02">Fevereiro</option>
-          <option value="03">Março</option>
-          <option value="04">Abril</option>
-          <option value="05">Maio</option>
-          <option value="06">Junho</option>
-          <option value="07">Julho</option>
-          <option value="08">Agosto</option>
-          <option value="09">Setembro</option>
-          <option value="10">Outubro</option>
-          <option value="11">Novembro</option>
-          <option value="12">Dezembro</option>
-        </select>
+          <select formControlName="month" name="" id="" required>
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+          </select>
 
-        <input
-          type="number"
-          name=""
-          id=""
-          min="2000"
-          max="2024"
-          formControlName="year"
-          required
-        >
+          <input
+            type="number"
+            name=""
+            id=""
+            min="2000"
+            max="2024"
+            formControlName="year"
+            required
+          >
+        </div>
 
         <app-button
           type="submit"
@@ -99,12 +102,14 @@
         </thead>
 
         <tbody>
-          @for (row of categories[selectedCategory].data; track $index) {
+          @for (row of categories[selectedCategory].data; track row.id) {
             <tr
-              (click)="navigateToDetailedConsult($index)"
+              (click)="selectedCategory !== 'family-scholarships' ? navigateToDetailedConsult(row.id) : null"
             >
               @for (header of categories[selectedCategory].headers; track $index) {
-                <td>
+                <td
+                  attr.data-label="{{ categories[selectedCategory].headers[$index] }}"
+                >
                   {{ getColumnValue(row, header) }}
                 </td>
               }

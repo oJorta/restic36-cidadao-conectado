@@ -12,10 +12,8 @@ export class ConsultService {
   constructor(private http: HttpClient) { }
 
   getData(type: DataType, city?: string, date?: string): Observable<Resign[] | FamilyScholarship[] | Adment[]> {
-    console.log('city', city);
-    console.log('date', date);
     if (type === 'family-scholarships') {
-      return this.http.get<FamilyScholarship[]>(`${this.apiUrl}/${type}?yearMonthDate=${date}&cityIbgeCode=${city}`);
+      return this.http.get<FamilyScholarship[]>(`${this.apiUrl}/${type}/${city}?yearMonth=${date}`);
     } else {
       return this.http.get<Resign[] | Adment[]>(`${this.apiUrl}/${type}`);
     }

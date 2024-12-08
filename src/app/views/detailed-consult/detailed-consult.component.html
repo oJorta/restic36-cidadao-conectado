@@ -9,11 +9,10 @@
   <div class="content">
     <div class="detailed-info-container">
       <h2>ID #{{ resourceId }}</h2>
+      <hr>
         <div class="info">
-          @for (row of resource.data; track $index) {
-            @for (header of resource.headers; track $index) {
-              <p><span>{{ header.formatted }}:</span> {{ getColumnValue(row, header.formatted) }}</p>
-            }
+          @for (header of resource.headers; track $index) {
+            <p><span>{{ header.formatted }}:</span> {{ getColumnValue(resource.data, header.formatted) }}</p>
           }
         </div>
         <!-- <div class="detailed-info">
