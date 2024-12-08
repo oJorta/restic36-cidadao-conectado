@@ -76,13 +76,18 @@ export interface Adment {
 
 export interface Post {
   userId: string;
-  id?: number;
+  id: number;
   title?: string;
   desc?: string;
   tags?: string;
   pubDate: string;
-  likes: string[];
+  likes: Like[];
   comments: string[];
+}
+
+export interface Like {
+  likeId: number;
+  userId: string;
 }
 
 export type SortByField = 'likes' | 'comments' | 'date';

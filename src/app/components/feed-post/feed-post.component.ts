@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../button/button.component";
-import { DatePipe } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
+import { Like } from '../../types/models';
+import { PostService } from '../../services/post/post.service';
 
 @Component({
   selector: 'app-feed-post',
@@ -13,12 +14,13 @@ import { UserService } from '../../services/user/user.service';
   styleUrl: './feed-post.component.css'
 })
 export class FeedPostComponent {
+  @Input() id!: number;
   @Input() userId: string = '';
   @Input() userName: string = 'usuário';
   @Input() title: string = 'Título da postagem';
   @Input() date!: string;
   @Input() description: string = 'Descrição da postagem';
-  @Input() likes: string[] = [];
+  @Input() likes: Like[] = [];
   @Input() comments: string[] = [];
   @Input() tags!: string | undefined;
 
@@ -27,9 +29,12 @@ export class FeedPostComponent {
   userLiked: boolean = false;
   isExpanded: boolean = false;
 
+  authUserId!: string
+
   constructor(
     private auth: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private postService: PostService
   ) { }
 
   ngOnInit() {
@@ -40,7 +45,9 @@ export class FeedPostComponent {
     });
 
     this.auth.getUser().subscribe(user => {
-      this.userLiked = this.likes.includes(user?.sub?.split('|')[1] || '');
+      console.log(user);
+      this.authUserId = user?.sub?.split('|')[1] || '';
+      this.userLiked = this.likes.some(like => like.userId === this.authUserId);
     });
 
     const timeDifference = new Date().getTime() - new Date(this.date).getTime();
@@ -53,6 +60,19 @@ export class FeedPostComponent {
   }
 
   toggleLike() {
+    this.userLiked = !this.userLiked;
+    const request = this.userLiked
+      ? this.postService.likePost(this.id, this.authUserId)
+      : this.postService.unlikePost(this.id, this.getLikeId(this.authUserId)!);
 
+    request.subscribe(() => this.revalidatePost(this.id));
+  }
+
+  getLikeId(userId: string): number | undefined{
+    return this.likes.find(like => like.userId === userId)?.likeId;
+  }
+
+  revalidatePost(postId: number) {
+    this.postService.revalidatePost(postId).subscribe((data) => this.likes = data.likes);
   }
 }
