@@ -61,6 +61,7 @@
   <div class="feed-container">
     @for (post of posts; track post.id) {
       <app-feed-post
+        [id]="post.id"
         [userId]="post.userId"
         [title]="post.title || 'Sem título'"
         [description]="post.desc || 'Sem descrição'"
