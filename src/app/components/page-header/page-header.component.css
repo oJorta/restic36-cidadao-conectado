@@ -15,32 +15,4 @@
   gap: 1rem;
 }
 
-.user-profile-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 215px;
-  gap: .5rem;
-  padding: 6px 14px;
-  border-radius: 5px;
-  background-color: var(--blue-primary);
-  box-shadow: var(--box-shadow);
-  overflow: hidden;
-}
 
-.name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-break: break-word;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.user-picture img {
-  width: 32px;
-  height: 32px;
-  border-radius: 5px;
-  object-fit: cover;
-}
