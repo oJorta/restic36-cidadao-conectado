@@ -34,6 +34,7 @@ export class AuthService {
           id: user.sub?.split('|')[1] || '',
           name: user.name || 'Usuário',
           email: user.email || '',
+          avatar: user.picture || '',
         }
 
         this.userService.getUserById(userData.id).subscribe({
@@ -41,7 +42,7 @@ export class AuthService {
             console.log('Usuário já existe');
           },
           error: () => {
-            this.userService.createUser(userData).subscribe(() => {
+            this.userService.createUser(userData).subscribe((response) => {
               console.log('Usuário criado');
             });
           }

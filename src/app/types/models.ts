@@ -2,7 +2,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  socialLinkProvider: string;
+  avatar: string;
 }
 
 export interface PostInteraction {
@@ -85,6 +85,14 @@ export interface Post {
   pubDate: string;
   likes: Like[];
   comments: string[];
+}
+
+export interface PostRequest {
+  userId: string;
+  title: string;
+  desc?: string;
+  tags?: string;
+  image?: File;
 }
 
 export interface Like {

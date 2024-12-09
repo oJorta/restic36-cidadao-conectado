@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
 import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +7,7 @@ import { ConsultService } from '../../services/consult/consult.service';
 @Component({
   selector: 'app-detailed-consult',
   standalone: true,
-  imports: [PageHeaderComponent, CurrencyPipe],
+  imports: [PageHeaderComponent],
   templateUrl: './detailed-consult.component.html',
   styleUrl: './detailed-consult.component.css'
 })
@@ -36,7 +35,6 @@ export class DetailedConsultComponent {
     this.categoryName = this.category === 'resigns' ? 'Renúncia Fiscal' : this.category === 'family-scholarships' ? 'Bolsa Família' : 'Emenda Parlamentar';
 
     this.consultService.getDataById(this.category, this.resourceId).subscribe(data => {
-      console.log(data);
       if (data.length === 0) {
         console.warn(`Nenhum dado encontrado para a categoria ${this.category}`);
         this.resource.data = [];
@@ -50,8 +48,6 @@ export class DetailedConsultComponent {
         originalKey: key,
         formatted: this.formatHeader(key)
       }));
-
-      console.log('Headers formatados:', this.resource.headers);
     });
   }
 

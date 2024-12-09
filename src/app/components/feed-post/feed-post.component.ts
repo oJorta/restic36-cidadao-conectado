@@ -28,6 +28,7 @@ export class FeedPostComponent {
   tagsArray: string[] = [];
   userLiked: boolean = false;
   isExpanded: boolean = false;
+  userAvatar!: string;
 
   authUserId!: string
 
@@ -40,12 +41,11 @@ export class FeedPostComponent {
   ngOnInit() {
     this.userService.getUsers().subscribe(users => {
       const user = users.find(user => user.id === this.userId);
-      console.log(users)
       this.userName = user?.name.split(' ')[0] || 'usuário';
+      this.userAvatar = user?.avatar || '../../../assets/images/feed-post-user-pic.png';
     });
 
     this.auth.getUser().subscribe(user => {
-      console.log(user);
       this.authUserId = user?.sub?.split('|')[1] || '';
       this.userLiked = this.likes.some(like => like.userId === this.authUserId);
     });

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 
-import { Post, SortByField, SortOrder } from '../../types/models';
+import { Post, PostRequest, SortByField, SortOrder } from '../../types/models';
 import { FeedPostComponent } from "../../components/feed-post/feed-post.component";
 import { ButtonComponent } from "../../components/button/button.component";
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
@@ -38,6 +38,7 @@ export class FeedComponent {
 
   ngOnInit() {
     this.postService.getPosts().subscribe(posts => {
+      console.log(posts);
       this.posts = posts;
       this.sortPosts(this.sortBy, this.sortOrder);
     });
@@ -86,13 +87,16 @@ export class FeedComponent {
   createPost() {
     this.isCreatePostModalOpen = false;
     this.auth.getUser().subscribe(user => {
-      const newPost: Partial<Post> = {
+      const newPost: PostRequest = {
         userId: user?.sub?.split('|')[1]!,
         title: this.postForm.value.title!,
         desc: this.postForm.value.desc!,
         tags: this.postForm.value.tags?.split(' ').join(',')!,
       }
-      this.postService.createPost(newPost).subscribe(() => {
+      console.log(newPost);
+      this.postService.createPost(newPost).subscribe((response) => {
+        console.log(response);
+        console.log('post criado');
         this.postService.getPosts().subscribe(posts => {
           this.posts = posts
           this.sortPosts(this.sortBy, this.sortOrder);

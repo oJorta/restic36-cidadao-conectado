@@ -66,6 +66,7 @@ export class ConsultComponent {
   }
 
   fetchCategoryData(category: DataType) {
+    this.notificationService.showMessage('Carregando dados...');
     if (category === 'family-scholarships') {
       this.searchFamilyScholarships();
     } else {
