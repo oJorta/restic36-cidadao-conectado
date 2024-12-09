@@ -95,7 +95,6 @@ export class FeedComponent {
       }
       console.log(newPost);
       this.postService.createPost(newPost).subscribe((response) => {
-        console.log(response);
         console.log('post criado');
         this.postService.getPosts().subscribe(posts => {
           this.posts = posts

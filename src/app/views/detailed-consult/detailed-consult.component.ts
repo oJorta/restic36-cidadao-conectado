@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { PageHeaderComponent } from "../../components/page-header/page-header.component";
 import { Adment, DataType, FamilyScholarship, Resign } from '../../types/models';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +8,7 @@ import { ConsultService } from '../../services/consult/consult.service';
 @Component({
   selector: 'app-detailed-consult',
   standalone: true,
-  imports: [PageHeaderComponent],
+  imports: [PageHeaderComponent, CurrencyPipe],
   templateUrl: './detailed-consult.component.html',
   styleUrl: './detailed-consult.component.css'
 })
@@ -60,7 +61,6 @@ export class DetailedConsultComponent {
 
   getColumnValue(row: any, formattedHeader: string): any {
     const mapping = this.resource.headers.find(header => header.formatted === formattedHeader);
-
     if (!mapping) {
       console.warn(`Chave correspondente ao header "${formattedHeader}" não encontrada.`);
       return '—';
