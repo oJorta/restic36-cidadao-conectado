@@ -1,27 +1,81 @@
-# Restic36CidadaoConectado
+# 🌐 Cidadão Conectado - Transparência e Participação Cívica
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+Projeto desenvolvido como parte da Residência TIC 36 do **CEPEDI**, com o objetivo de promover transparência e participação cívica nos serviços públicos através de uma solução digital inovadora.
 
-## Development server
+## 🎯 Objetivo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Fortalecer a democracia por meio de uma plataforma que centraliza informações públicas e oferece ferramentas interativas para engajamento cidadão. A iniciativa visa melhorar a acessibilidade e a usabilidade de dados governamentais, atendendo a diferentes públicos.
 
-## Code scaffolding
+## 🚀 Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Consulta de Dados Públicos**: Integração com a API do Portal da Transparência para exibir informações como renúncias fiscais, emendas parlamentares e dados de programas sociais.
+- **Interação Cidadã**: Sistema de fórum para discussões e sugestões, permitindo maior participação nas decisões públicas.
+- **Notificações Personalizadas**: Informações atualizadas sobre temas de interesse.
+- **Expansão Mobile**: Planejamento de um aplicativo em React Native para ampliar o acesso.
 
-## Build
+## 🛠️ Tecnologias Utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Frontend**: Angular
+- **Backend**: .NET Core
+- **Banco de Dados**: SQL Server
+- **Infraestrutura em Nuvem**: AWS (S3, EC2)
+- **Prototipagem**: Figma
+- **Mobile** (planejado): React Native
+- **Testes Automatizados**: Robot Framework
 
-## Running unit tests
+## 🗓️ Etapas do Desenvolvimento
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Levantamento de Requisitos**: Entrevistas e mapeamento de jornadas dos usuários.
+2. **Desenvolvimento do MVP**:
+   - Integração com API do Portal da Transparência.
+   - Implementação de fórum interativo.
+   - Prototipação detalhada e validação com usuários.
+3. **Infraestrutura Técnica**:
+   - Arquitetura modular para escalabilidade e manutenção.
+   - Hospedagem na AWS com alta disponibilidade.
+4. **Testes e Qualidade**:
+   - Testes automatizados e manuais para diferentes dispositivos.
+5. **Expansão e Validação**:
+   - Planejamento do aplicativo mobile para maior alcance.
 
-## Running end-to-end tests
+## 📊 Resultados de Validação
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Adesão Inicial**: 88,2% dos participantes indicaram interesse em utilizar a plataforma.
+- **Feedback sobre Acessibilidade**: 64,7% classificaram os dados públicos como pouco acessíveis, reforçando a necessidade do projeto.
+- **Impacto Social**: 100% dos participantes acreditam que a transparência governamental melhora a relação entre cidadãos e governo.
 
-## Further help
+## 🛠️ Como Executar
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Pré-requisitos
+- Node.js (v14 ou superior)
+- .NET Core SDK
+- Angular CLI
+
+### Passos
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/cePedi-residencia/cidadao-conectado.git
+   cd cidadao-conectado
+
+2. **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+3. **Execute o servidor de desenvolvimento:**
+    ```bash
+    ng serve  
+4. **Acesse a aplicação:**
+  
+    Abra o navegador e acesse http://localhost:4200.
+
+# 👥 Equipe
+- **Adrielle Maria Alves Queiroz**, amaqueiroz.cic@uesc.br
+- **Ezequiel Lobo Oliveira**, eloliveira.cic@uesc.br
+- **Flávia Alessandra Santos de Jesus**, developerflavia@gmail.com
+- **Gustavo Aragão Oliveira**, gaoliveira.cic@uesc.br
+- **Hênio Pedro Silva Santana**, hpssantana.cic@uesc.br
+- **João Pedro Correia da Silva Noberto**, jpcsnoberto@gmail.com
+- **Mateus Silva Lisboa**, mslisboa.cic@uesc.br
+- **Pedro Affonso Silva Marques**, pedroaffonsosilvamarques@gmail.com
+- **Solana Bomfim Lemos**, solana.ametista@gmail.com
+- **Vitor Pires Rocha**, vitor.pr04@hotmail.com
